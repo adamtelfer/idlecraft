@@ -7,7 +7,10 @@ namespace Assets
 {
     public class Factory
     {
-        public String name;
+        public string name;
+        public string description;
+
+        public Economy factoryBuildCost;
 
         public Economy unitProfit;
         public Economy cappedProfit;
@@ -15,6 +18,13 @@ namespace Assets
 
         public Economy unitCost;
         public Economy collectedUnits;
+
+        public string factoryType;
+        
+        public class FactoryTypes
+        {
+            public static string BASIC_FACTORY = "basicfactory";
+        }
 
         public enum FactoryStatus
         {
@@ -35,7 +45,8 @@ namespace Assets
 
         public Factory()
         {
-            name = "New Factory";
+            name = "Basic Factory";
+            description = "Makes Food";
 
             unitProfit = new Economy();
             unitProfit.food = 1;
@@ -44,7 +55,30 @@ namespace Assets
             currentProfit = new Economy();
             unitCost = new Economy();
 
+            factoryBuildCost = new Economy();
+            factoryBuildCost.food = 5;
+
+            factoryType = FactoryTypes.BASIC_FACTORY;
+
             timeToProduceUnit = 5f;
+            _time = timeToProduceUnit;
+            _status = FactoryStatus.WORKING;
+        }
+
+        public Factory (Factory f)
+        {
+            name = f.name;
+            description = f.description;
+            factoryType = f.factoryType;
+
+            unitProfit = new Economy(f.unitProfit);
+            cappedProfit = new Economy(f.cappedProfit);
+            currentProfit = new Economy();
+            unitCost = new Economy(f.unitCost);
+            factoryBuildCost = new Economy(f.factoryBuildCost);
+
+            timeToProduceUnit = f.timeToProduceUnit;
+
             _time = timeToProduceUnit;
             _status = FactoryStatus.WORKING;
         }

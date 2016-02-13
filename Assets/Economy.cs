@@ -25,6 +25,14 @@ namespace Assets
             metal = 0;
         }
 
+        public Economy(Economy e)
+        {
+            food = e.food;
+            wood = e.wood;
+            stone = e.stone;
+            metal = e.metal;
+        }
+
         public int getValueForType (EconomyType type)
         {
             switch (type)

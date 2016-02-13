@@ -19,13 +19,12 @@ public class FactoryViewManager : MonoBehaviour {
     public void AddFactory(Factory f)
     {
         GameObject g = Instantiate(factoryViewPrefab);
-        g.transform.parent = this.transform;
+        g.transform.SetParent(this.transform);
         g.transform.localScale = new Vector3(1f, 1f, 1f);
         FactoryView fView = g.GetComponent<FactoryView>();
         fView.SetFactory(f);
 
         RectTransform rect = this.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(0f, g.GetComponent<RectTransform>().rect.height * this.transform.childCount);
-
     }
 }

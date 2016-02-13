@@ -18,7 +18,7 @@ public class FactoryView : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
+        factory = null;
 	}
 
     public void SetFactory(Factory f)
@@ -39,23 +39,28 @@ public class FactoryView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        singleProgressBar.fillAmount = factory.progressToNextUnit();
-        totalProgressBar.fillAmount = factory.progressToCapProfit();
+        if (factory != null)
+        {
+            singleProgressBar.fillAmount = factory.progressToNextUnit();
+            totalProgressBar.fillAmount = factory.progressToCapProfit();
 
-        if (factory.progressToCapProfit() > 0f)
-        {
-            collectButton.gameObject.SetActive(true);
-        } else
-        {
-            collectButton.gameObject.SetActive(false);
-        }
+            if (factory.progressToCapProfit() > 0f)
+            {
+                collectButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                collectButton.gameObject.SetActive(false);
+            }
 
-        if (factory.status == Factory.FactoryStatus.WORKING)
-        {
-            haltedContainer.SetActive(false);
-        } else
-        {
-            haltedContainer.SetActive(true);
+            if (factory.status == Factory.FactoryStatus.WORKING)
+            {
+                haltedContainer.SetActive(false);
+            }
+            else
+            {
+                haltedContainer.SetActive(true);
+            }
         }
 	}
 }

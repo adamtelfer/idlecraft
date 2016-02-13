@@ -28,9 +28,9 @@ public class GameState : MonoBehaviour {
         }
 	}
 
-    public void AddFactory()
+    public void AddFactory(Factory f)
     {
-        Factory nFactory = new Factory();
+        Factory nFactory = new Factory(f);
         factories.Push(nFactory);
         factoryManager.AddFactory(nFactory);
     }
