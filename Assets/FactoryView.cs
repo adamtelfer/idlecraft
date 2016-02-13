@@ -18,7 +18,6 @@ public class FactoryView : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        factory = null;
 	}
 
     public void SetFactory(Factory f)

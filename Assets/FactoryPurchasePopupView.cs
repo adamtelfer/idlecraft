@@ -19,8 +19,11 @@ public class FactoryPurchasePopupView : MonoBehaviour {
 
     public void PurchaseAndClose (Factory f)
     {
-        GameState.sharedState.AddFactory(f);
-        Close();
+        if (GameState.sharedState.CanPurchaseFactory(f))
+        {
+            GameState.sharedState.PurchaseFactory(f);
+            Close();
+        }
     }
 
     public void AddCell(Factory f)

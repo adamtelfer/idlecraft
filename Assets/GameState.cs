@@ -17,6 +17,7 @@ public class GameState : MonoBehaviour {
 	void Start () {
         sharedState = this;
         currentEconomy = new Economy();
+        currentEconomy.food = 20;
         factories = new System.Collections.Generic.Stack<Factory>();
 	}
 	
@@ -28,11 +29,20 @@ public class GameState : MonoBehaviour {
         }
 	}
 
-    public void AddFactory(Factory f)
+    public bool CanPurchaseFactory (Factory f)
     {
-        Factory nFactory = new Factory(f);
-        factories.Push(nFactory);
-        factoryManager.AddFactory(nFactory);
+        return currentEconomy.canPurchase(f.factoryBuildCost);
+    }
+
+    public void PurchaseFactory(Factory f)
+    {
+        if (CanPurchaseFactory(f))
+        {
+            currentEconomy.purchase(f.factoryBuildCost);
+            Factory nFactory = new Factory(f);
+            factories.Push(nFactory);
+            factoryManager.AddFactory(nFactory);
+        }
     }
 
     public void CollectFromFactory( Factory f )

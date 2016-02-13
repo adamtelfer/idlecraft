@@ -88,5 +88,24 @@ namespace Assets
             return food + wood + stone + metal;
         }
 
+        public bool canPurchase(Economy e)
+        {
+            return (food >= e.food &&
+                wood >= e.wood &&
+                stone >= e.stone &&
+                metal >= e.metal);
+        }
+
+        public void purchase(Economy e)
+        {
+            if (canPurchase(e))
+            {
+                food -= e.food;
+                wood -= e.wood;
+                stone -= e.stone;
+                metal -= e.metal;
+            }
+        }
+
     }
 }
