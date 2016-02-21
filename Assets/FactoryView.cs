@@ -14,21 +14,46 @@ public class FactoryView : MonoBehaviour {
 
     public UnityEngine.UI.Button collectButton;
 
+    public Animator anim;
+    public static string kFlipAnimationTrigger = "Flip";
+
     public GameObject haltedContainer;
+
+    public GameObject normalView;
+    public GameObject upgradeView;
+
+    public void FlipViews()
+    {
+        if (normalView.active)
+        {
+            normalView.SetActive(false);
+            upgradeView.SetActive(true);
+        } else
+        {
+            normalView.SetActive(true);
+            upgradeView.SetActive(false);
+        }
+    }
 
     // Use this for initialization
     void Start () {
+        anim = this.gameObject.GetComponent<Animator>();
 	}
 
     public void SetFactory(Factory f)
     {
         factory = f;
-        factoryName.text = f.name;
+        factoryName.text = f.config.name;
     }
 
     public void Collect()
     {
         GameState.sharedState.CollectFromFactory(factory);
+    }
+
+    public void GoToUpgrade()
+    {
+        anim.SetTrigger(kFlipAnimationTrigger);
     }
 
     public void Restart()

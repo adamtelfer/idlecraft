@@ -5,7 +5,7 @@ using TMPro;
 
 public class FactoryPurchaseCell : MonoBehaviour {
 
-    public Factory factoryToPurchase;
+    public FactoryConfig factoryToPurchase;
 
     public FactoryPurchasePopupView parentView;
 
@@ -23,13 +23,13 @@ public class FactoryPurchaseCell : MonoBehaviour {
 	
 	}
 
-    public void SetFactory ( Factory f )
+    public void SetFactory ( FactoryConfig f )
     {
         factoryToPurchase = f;
 
         name.text = f.name;
         description.text = f.description;
-        cost.text = f.factoryBuildCost.food.ToString();
+        cost.text = GameState.sharedState.costForFactoryType(f).gold.ToString();
     }
 
     public void OnClick()

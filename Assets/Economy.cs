@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using System.Text;
 
 namespace Assets
@@ -9,17 +10,17 @@ namespace Assets
     {
         public enum EconomyType
         {
-            FOOD, WOOD, STONE, METAL
+            GOLD, WOOD, STONE, METAL
         };
 
-        public int food;
+        public int gold;
         public int wood;
         public int stone;
         public int metal;
 
         public Economy()
         {
-            food = 0;
+            gold = 0;
             wood = 0;
             stone = 0;
             metal = 0;
@@ -27,18 +28,26 @@ namespace Assets
 
         public Economy(Economy e)
         {
-            food = e.food;
+            gold = e.gold;
             wood = e.wood;
             stone = e.stone;
             metal = e.metal;
+        }
+
+        public Economy(int pgold, int pwood = 0, int pstone = 0, int pmetal = 0)
+        {
+            gold = pgold;
+            wood = pwood;
+            stone = pstone;
+            metal = pmetal;
         }
 
         public int getValueForType (EconomyType type)
         {
             switch (type)
             {
-                case EconomyType.FOOD:
-                    return food;
+                case EconomyType.GOLD:
+                    return gold;
                 case EconomyType.WOOD:
                     return wood;
                 case EconomyType.STONE:
@@ -52,16 +61,26 @@ namespace Assets
         public static Economy operator +(Economy e1, Economy e2)
         {
             Economy n = new Economy();
-            n.food = e1.food + e2.food;
+            n.gold = e1.gold + e2.gold;
             n.wood = e1.wood + e2.wood;
             n.stone = e1.stone + e2.stone;
             n.metal = e1.metal + e2.metal;
             return n;
         }
 
+        public static Economy operator *(Economy e1, int val2)
+        {
+            Economy n = new Economy();
+            n.gold = e1.gold * val2;
+            n.wood = e1.wood * val2;
+            n.stone = e1.stone * val2;
+            n.metal = e1.metal * val2;
+            return n;
+        }
+
         public void capEconomy (Economy capEconomy)
         {
-            if (food > capEconomy.food) { food = capEconomy.food; }
+            if (gold > capEconomy.gold) { gold = capEconomy.gold; }
             if (wood > capEconomy.wood) { wood = capEconomy.wood; }
             if (stone > capEconomy.stone) { stone = capEconomy.stone; }
             if (metal > capEconomy.metal) { metal = capEconomy.metal; }
@@ -69,7 +88,7 @@ namespace Assets
 
         public static bool operator ==(Economy e1, Economy e2)
         {
-            return (e1.food == e2.food &&
+            return (e1.gold == e2.gold &&
                 e1.wood == e2.wood &&
                 e1.stone == e2.stone &&
                 e1.metal == e2.metal);
@@ -77,7 +96,7 @@ namespace Assets
 
         public static bool operator !=(Economy e1, Economy e2)
         {
-            return (e1.food != e2.food &&
+            return (e1.gold != e2.gold &&
                 e1.wood != e2.wood &&
                 e1.stone != e2.stone &&
                 e1.metal != e2.metal);
@@ -85,12 +104,12 @@ namespace Assets
 
         public int size()
         {
-            return food + wood + stone + metal;
+            return gold + wood + stone + metal;
         }
 
         public bool canPurchase(Economy e)
         {
-            return (food >= e.food &&
+            return (gold >= e.gold &&
                 wood >= e.wood &&
                 stone >= e.stone &&
                 metal >= e.metal);
@@ -100,11 +119,22 @@ namespace Assets
         {
             if (canPurchase(e))
             {
-                food -= e.food;
+                gold -= e.gold;
                 wood -= e.wood;
                 stone -= e.stone;
                 metal -= e.metal;
             }
+        }
+
+        public Economy applyGrowthCurve(int x)
+        {
+            float growthBase = Config.masterConfig.growthExponent;
+            Economy e = new Economy();
+            e.gold = (int)(gold * Mathf.Pow(growthBase, x+1));
+            e.wood = (int)(wood * Mathf.Pow(growthBase, x+1));
+            e.stone = (int)(stone * Mathf.Pow(growthBase, x+1));
+            e.metal = (int)(metal * Mathf.Pow(growthBase, x+1));
+            return e;
         }
 
     }

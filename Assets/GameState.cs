@@ -15,9 +15,14 @@ public class GameState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
         sharedState = this;
-        currentEconomy = new Economy();
-        currentEconomy.food = 20;
+        Config c = new Config();
+
+        // starting economy
+        currentEconomy = new Economy(c.initialEconomy);
+
+        // factories to start with
         factories = new System.Collections.Generic.Stack<Factory>();
 	}
 	
@@ -29,16 +34,34 @@ public class GameState : MonoBehaviour {
         }
 	}
 
-    public bool CanPurchaseFactory (Factory f)
+    public int numberOfFactoryTypeOwned(string factoryID)
     {
-        return currentEconomy.canPurchase(f.factoryBuildCost);
+        int i = 0;
+        foreach (Factory f in factories)
+        {
+            if (string.Equals(f.config.factoryID,factoryID))
+            {
+                ++i;
+            }
+        }
+        return i;
     }
 
-    public void PurchaseFactory(Factory f)
+    public Economy costForFactoryType(FactoryConfig factoryType)
+    {
+        return factoryType.baseBuildCost.applyGrowthCurve(numberOfFactoryTypeOwned(factoryType.factoryID));
+    }
+
+    public bool CanPurchaseFactory (FactoryConfig f)
+    {
+        return numberOfFactoryTypeOwned(f.factoryID) < f.maxOfThisType && currentEconomy.canPurchase(costForFactoryType(f));
+    }
+
+    public void PurchaseFactory(FactoryConfig f)
     {
         if (CanPurchaseFactory(f))
         {
-            currentEconomy.purchase(f.factoryBuildCost);
+            currentEconomy.purchase(costForFactoryType(f));
             Factory nFactory = new Factory(f);
             factories.Push(nFactory);
             factoryManager.AddFactory(nFactory);

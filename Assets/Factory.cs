@@ -7,11 +7,9 @@ namespace Assets
 {
     public class Factory
     {
-        public string name;
-        public string description;
+        public FactoryConfig config;
 
-        public Economy factoryBuildCost;
-
+        //TODO: Factory is not loading Config Properly
         public Economy unitProfit;
         public Economy cappedProfit;
         public Economy currentProfit;
@@ -19,12 +17,8 @@ namespace Assets
         public Economy unitCost;
         public Economy collectedUnits;
 
-        public string factoryType;
-        
-        public class FactoryTypes
-        {
-            public static string BASIC_FACTORY = "basicfactory";
-        }
+        public int unitsPerMinute;
+        private float timeToProduceUnit;
 
         public enum FactoryStatus
         {
@@ -32,9 +26,6 @@ namespace Assets
             FULL,
             HALTED
         };
-
-        public float timeToProduceUnit;
-
         private FactoryStatus _status;
         public FactoryStatus status
         {
@@ -43,41 +34,16 @@ namespace Assets
 
         private float _time;
 
-        public Factory()
+        public Factory (FactoryConfig f)
         {
-            name = "Basic Factory";
-            description = "Makes Food";
+            config = f;
 
-            unitProfit = new Economy();
-            unitProfit.food = 1;
-            cappedProfit = new Economy();
-            cappedProfit.food = 10;
+            unitProfit = new Economy(f.baseProfit);
+            cappedProfit = new Economy(f.baseProfit) * f.baseUnitCapacity;
             currentProfit = new Economy();
-            unitCost = new Economy();
+            unitCost = new Economy(f.baseUnitCost);
 
-            factoryBuildCost = new Economy();
-            factoryBuildCost.food = 5;
-
-            factoryType = FactoryTypes.BASIC_FACTORY;
-
-            timeToProduceUnit = 5f;
-            _time = timeToProduceUnit;
-            _status = FactoryStatus.WORKING;
-        }
-
-        public Factory (Factory f)
-        {
-            name = f.name;
-            description = f.description;
-            factoryType = f.factoryType;
-
-            unitProfit = new Economy(f.unitProfit);
-            cappedProfit = new Economy(f.cappedProfit);
-            currentProfit = new Economy();
-            unitCost = new Economy(f.unitCost);
-            factoryBuildCost = new Economy(f.factoryBuildCost);
-
-            timeToProduceUnit = f.timeToProduceUnit;
+            timeToProduceUnit = 60f / ((float)unitsPerMinute);
 
             _time = timeToProduceUnit;
             _status = FactoryStatus.WORKING;
@@ -123,6 +89,18 @@ namespace Assets
         public void Restart()
         {
             _status = FactoryStatus.WORKING;
+        }
+
+        public void UpgradeCapacity()
+        {
+            cappedProfit = cappedProfit + (unitProfit + unitProfit + unitProfit + unitProfit);
+        }
+
+        public void UpgradeProductionSpeed()
+        {
+            unitsPerMinute += 5;
+            timeToProduceUnit = 60f / ((float)unitsPerMinute);
+            _time = timeToProduceUnit;
         }
     }
 }
