@@ -22,7 +22,7 @@ public class FactoryViewManager : MonoBehaviour {
         g.transform.SetParent(this.transform);
         g.transform.localScale = new Vector3(1f, 1f, 1f);
         FactoryView fView = g.GetComponent<FactoryView>();
-        fView.SetFactory(f);
+        fView.Setup(f);
 
         RectTransform rect = this.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(0f, g.GetComponent<RectTransform>().rect.height * this.transform.childCount);

@@ -57,6 +57,23 @@ public class GameState : MonoBehaviour {
         return numberOfFactoryTypeOwned(f.factoryID) < f.maxOfThisType && currentEconomy.canPurchase(costForFactoryType(f));
     }
 
+    public bool CanPurchase (Economy e)
+    {
+        return currentEconomy.canPurchase(e);
+    }
+
+    public bool Purchase (Economy e)
+    {
+        if (CanPurchase(e))
+        {
+            currentEconomy.purchase(e);
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
     public void PurchaseFactory(FactoryConfig f)
     {
         if (CanPurchaseFactory(f))

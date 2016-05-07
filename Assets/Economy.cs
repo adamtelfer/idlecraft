@@ -158,5 +158,15 @@ namespace Assets
             return e;
         }
 
+        public string toReadableText()
+        {
+            string result = "";
+            if (gold > 0) { result += string.Format("{0}xGOLD ", gold);  }
+            if (wood > 0) { result += string.Format("{0}xWOOD ", wood);  }
+            if (stone > 0) { result += string.Format("{0}xSTONE ", stone); }
+            if (metal > 0) { result += string.Format("{0}xMETAL ", metal); }
+            return result;
+        }
+
     }
 }

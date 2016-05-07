@@ -8,7 +8,8 @@ public class RootViewManager : MonoBehaviour {
     public RectTransform PopUpRoot;
     public RectTransform PoolRoot;
 
-    public GameObject PurchaseFactoryPopUp;
+    public FactoryPurchasePopupView PurchaseFactoryPopUp;
+    public FactoryUpgradePopupView PurchaseUpgradePopup;
 
     public static RootViewManager sharedManager = null;
 
@@ -24,7 +25,7 @@ public class RootViewManager : MonoBehaviour {
 
     public void OpenPurchaseFactoryPopup()
     {
-        this.PushView(PurchaseFactoryPopUp);
+        this.PushView(PurchaseFactoryPopUp.gameObject);
     }
 
     //Currently Open Screen

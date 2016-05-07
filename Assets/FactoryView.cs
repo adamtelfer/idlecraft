@@ -15,61 +15,28 @@ public class FactoryView : MonoBehaviour {
 
     public UnityEngine.UI.Button collectButton;
 
-    public Animator anim;
-    public static string kFlipAnimationTrigger = "Flip";
-
     public GameObject haltedContainer;
-
-    public GameObject normalView;
-    public GameObject upgradeView;
-
-    public void FlipViews()
-    {
-        if (normalView.active)
-        {
-            normalView.SetActive(false);
-            upgradeView.SetActive(true);
-        } else
-        {
-            normalView.SetActive(true);
-            upgradeView.SetActive(false);
-        }
-    }
-
-    public void UpgradeSpeed()
-    {
-        factory.UpgradeProductionSpeed();
-    }
-
-    public void UpgradeCapacity()
-    {
-        factory.UpgradeCapacity();
-    }
-
-    public void UpgradeProduction()
-    {
-        factory.UpgradeProductionOutput();
-    }
 
     // Use this for initialization
     void Start () {
-        anim = this.gameObject.GetComponent<Animator>();
 	}
 
-    public void SetFactory(Factory f)
+    public void Setup(Factory f)
     {
         factory = f;
         factoryName.text = f.config.name;
     }
 
+    public void OpenUpgradePopup()
+    {
+        FactoryUpgradePopupView popup = RootViewManager.sharedManager.PurchaseUpgradePopup;
+        popup.Setup(factory);
+        RootViewManager.sharedManager.PushView(popup.gameObject); //TODO: Add Listeners to the core factory to hear for updates
+    }
+
     public void Collect()
     {
         GameState.sharedState.CollectFromFactory(factory);
-    }
-
-    public void GoToUpgrade()
-    {
-        anim.SetTrigger(kFlipAnimationTrigger);
     }
 
     public void Restart()
