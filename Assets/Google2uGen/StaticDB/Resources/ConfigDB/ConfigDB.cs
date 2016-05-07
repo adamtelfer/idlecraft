@@ -15,8 +15,10 @@ namespace Google2u
 	public class ConfigDBRow : IGoogle2uRow
 	{
 		public int _initial_gold;
-		public float _costExponent;
-		public ConfigDBRow(string __ID, string __initial_gold, string __costExponent) 
+		public float _buildingCostExponent;
+		public float _upgradeCostExponent;
+		public float _quantityCostExponent;
+		public ConfigDBRow(string __ID, string __initial_gold, string __buildingCostExponent, string __upgradeCostExponent, string __quantityCostExponent) 
 		{
 			{
 			int res;
@@ -27,14 +29,28 @@ namespace Google2u
 			}
 			{
 			float res;
-				if(float.TryParse(__costExponent, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_costExponent = res;
+				if(float.TryParse(__buildingCostExponent, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_buildingCostExponent = res;
 				else
-					Debug.LogError("Failed To Convert _costExponent string: "+ __costExponent +" to float");
+					Debug.LogError("Failed To Convert _buildingCostExponent string: "+ __buildingCostExponent +" to float");
+			}
+			{
+			float res;
+				if(float.TryParse(__upgradeCostExponent, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_upgradeCostExponent = res;
+				else
+					Debug.LogError("Failed To Convert _upgradeCostExponent string: "+ __upgradeCostExponent +" to float");
+			}
+			{
+			float res;
+				if(float.TryParse(__quantityCostExponent, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_quantityCostExponent = res;
+				else
+					Debug.LogError("Failed To Convert _quantityCostExponent string: "+ __quantityCostExponent +" to float");
 			}
 		}
 
-		public int Length { get { return 2; } }
+		public int Length { get { return 4; } }
 
 		public string this[int i]
 		{
@@ -53,7 +69,13 @@ namespace Google2u
 					ret = _initial_gold.ToString();
 					break;
 				case 1:
-					ret = _costExponent.ToString();
+					ret = _buildingCostExponent.ToString();
+					break;
+				case 2:
+					ret = _upgradeCostExponent.ToString();
+					break;
+				case 3:
+					ret = _quantityCostExponent.ToString();
 					break;
 			}
 
@@ -68,8 +90,14 @@ namespace Google2u
 				case "initial_gold":
 					ret = _initial_gold.ToString();
 					break;
-				case "costExponent":
-					ret = _costExponent.ToString();
+				case "buildingCostExponent":
+					ret = _buildingCostExponent.ToString();
+					break;
+				case "upgradeCostExponent":
+					ret = _upgradeCostExponent.ToString();
+					break;
+				case "quantityCostExponent":
+					ret = _quantityCostExponent.ToString();
 					break;
 			}
 
@@ -79,17 +107,19 @@ namespace Google2u
 		{
 			string ret = System.String.Empty;
 			ret += "{" + "initial_gold" + " : " + _initial_gold.ToString() + "} ";
-			ret += "{" + "costExponent" + " : " + _costExponent.ToString() + "} ";
+			ret += "{" + "buildingCostExponent" + " : " + _buildingCostExponent.ToString() + "} ";
+			ret += "{" + "upgradeCostExponent" + " : " + _upgradeCostExponent.ToString() + "} ";
+			ret += "{" + "quantityCostExponent" + " : " + _quantityCostExponent.ToString() + "} ";
 			return ret;
 		}
 	}
 	public sealed class ConfigDB : IGoogle2uDB
 	{
 		public enum rowIds {
-			Default
+			Default, Ver1, Ver2, Ver3
 		};
 		public string [] rowNames = {
-			"Default"
+			"Default", "Ver1", "Ver2", "Ver3"
 		};
 		public System.Collections.Generic.List<ConfigDBRow> Rows = new System.Collections.Generic.List<ConfigDBRow>();
 
@@ -106,7 +136,10 @@ namespace Google2u
 
 		private ConfigDB()
 		{
-			Rows.Add( new ConfigDBRow("Default", "15", "1.15"));
+			Rows.Add( new ConfigDBRow("Default", "75", "2", "1.5", "2"));
+			Rows.Add( new ConfigDBRow("Ver1", "75", "2", "1.5", "2"));
+			Rows.Add( new ConfigDBRow("Ver2", "75", "2", "1.5", "2"));
+			Rows.Add( new ConfigDBRow("Ver3", "75", "2", "1.5", "2"));
 		}
 		public IGoogle2uRow GetGenRow(string in_RowString)
 		{

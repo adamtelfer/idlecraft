@@ -13,9 +13,11 @@ namespace Assets
 
         public Economy initialEconomy;
 
-        public Dictionary<string,FactoryConfig> factoryTypes;
+        public float buildingCostExponent;
+        public float upgradeCostExponent;
+        public float productionCostExponent;
 
-        public float growthExponent;
+        public Dictionary<string,FactoryConfig> factoryTypes;
 
         public Config ()
         {
@@ -25,7 +27,9 @@ namespace Assets
             initialEconomy = new Economy();
             initialEconomy.gold = row._initial_gold;
 
-            growthExponent = row._costExponent;
+            buildingCostExponent = row._buildingCostExponent;
+            upgradeCostExponent = row._upgradeCostExponent;
+            productionCostExponent = row._quantityCostExponent;
 
             factoryTypes = new Dictionary<string,FactoryConfig>();
             // Add from FactoryDB from Google:

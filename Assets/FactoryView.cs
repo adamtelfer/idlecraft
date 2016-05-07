@@ -2,6 +2,7 @@
 using System.Collections;
 using Assets;
 using TMPro;
+using UnityEngine.UI;
 
 public class FactoryView : MonoBehaviour {
 
@@ -9,8 +10,8 @@ public class FactoryView : MonoBehaviour {
 
     public TextMeshProUGUI factoryName;
 
-    public UnityEngine.UI.Image singleProgressBar;
-    public UnityEngine.UI.Image totalProgressBar;
+    public Slider singleProgressBar;
+    public Slider totalProgressBar;
 
     public UnityEngine.UI.Button collectButton;
 
@@ -33,6 +34,21 @@ public class FactoryView : MonoBehaviour {
             normalView.SetActive(true);
             upgradeView.SetActive(false);
         }
+    }
+
+    public void UpgradeSpeed()
+    {
+        factory.UpgradeProductionSpeed();
+    }
+
+    public void UpgradeCapacity()
+    {
+        factory.UpgradeCapacity();
+    }
+
+    public void UpgradeProduction()
+    {
+        factory.UpgradeProductionOutput();
     }
 
     // Use this for initialization
@@ -65,8 +81,8 @@ public class FactoryView : MonoBehaviour {
 	void Update () {
         if (factory != null)
         {
-            singleProgressBar.fillAmount = factory.progressToNextUnit();
-            totalProgressBar.fillAmount = factory.progressToCapProfit();
+            singleProgressBar.value = factory.progressToNextUnit();
+            totalProgressBar.value = factory.progressToCapProfit();
 
             if (factory.progressToCapProfit() > 0f)
             {

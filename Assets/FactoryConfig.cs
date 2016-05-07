@@ -21,30 +21,55 @@ namespace Assets
         public int baseUnitCapacity;
         public int baseUnitsPerMinute;
 
+        public int stepCapacity;
+        public int stepQuantity;
+        public int stepSpeed;
+
+        public int maxCapacityUpgrades;
+        public int maxQuantityUpgrades;
+        public int maxSpeedUpgrades;
+
         public Economy upgradeCapacityBase;
         public Economy upgradeSpeedBase;
         public Economy upgradeQualityBase;
 
         public int maxOfThisType;
-        public int maxUpgradesEach;
 
         public FactoryConfig(string rowID, FactoryDBRow configRow)
         {
             factoryID = rowID;
             name = configRow._name;
             description = configRow._description;
-            baseBuildCost = new Economy(configRow._factoryBuildCostBase_gold);
-            baseProfit = new Economy(configRow._factoryUnitProfit_gold, configRow._factoryUnitProfit_wood, configRow._factoryUnitProfit_stone, configRow._factoryUnitProfit_metal);
-            baseUnitCost = new Economy(configRow._factoryUnitCost_gold, configRow._factoryUnitCost_wood, configRow._factoryUnitCost_stone, configRow._factoryUnitCost_metal);
 
-            baseUnitCapacity = configRow._unitCapacity;
-            baseUnitsPerMinute = configRow._unitsPerMinute;
+            baseBuildCost = new Economy(configRow._factoryBuildCostBase);
+
+            // profit type
+            baseProfit = new Economy((Economy.EconomyType)configRow._factoryUnitProfit_EconomyType, configRow._startQuantity);
+
+            // cost types
+            baseUnitCost = new Economy((Economy.EconomyType)configRow._factoryUnitCost_EconomyType_1, configRow._factoryUnitCost_Amount_1);
+
+            // base
+            baseUnitCapacity = configRow._startCapacity;
+            baseUnitsPerMinute = configRow._startProdPerMinute;
+
+            // step
+            stepQuantity = configRow._upgradeQuantityStep;
+            stepSpeed = configRow._upgradeSpeedStep;
+            stepCapacity = configRow._upgradeCapacityStep;
+
+            // upgrade cost
             upgradeCapacityBase = new Economy(configRow._upgradeCapacityCostBase_gold);
             upgradeSpeedBase = new Economy(configRow._upgradeSpeedCostBase_gold);
-            upgradeQualityBase = new Economy(configRow._upgradeQualityCostBase_gold);
+            upgradeQualityBase = new Economy(configRow._upgradeQuantityCostBase_gold);
 
-            maxOfThisType = configRow._maxOfThisType;
-            maxUpgradesEach = configRow._maxUpgradesEach;
+            // max upgrades
+            maxQuantityUpgrades = configRow._maxQuantityUpgrades;
+            maxSpeedUpgrades = configRow._maxSpeedUpgrades;
+            maxCapacityUpgrades = configRow._maxCapacityUpgrades;
+
+            // max of this type of factory
+            maxOfThisType = configRow._maxOfThisTypeOfFactory;
         }
     }
 }

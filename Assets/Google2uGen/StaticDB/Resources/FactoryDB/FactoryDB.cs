@@ -16,102 +16,96 @@ namespace Google2u
 	{
 		public string _name;
 		public string _description;
-		public int _factoryBuildCostBase_gold;
-		public int _factoryUnitProfit_gold;
-		public int _factoryUnitProfit_wood;
-		public int _factoryUnitProfit_stone;
-		public int _factoryUnitProfit_metal;
-		public int _factoryUnitCost_gold;
-		public int _factoryUnitCost_wood;
-		public int _factoryUnitCost_stone;
-		public int _factoryUnitCost_metal;
-		public int _unitCapacity;
-		public int _unitsPerMinute;
+		public int _factoryBuildCostBase;
+		public int _factoryUnitProfit_EconomyType;
+		public int _factoryUnitCost_EconomyType_1;
+		public int _factoryUnitCost_Amount_1;
+		public int _startCapacity;
+		public int _startProdPerMinute;
+		public int _startQuantity;
+		public int _upgradeCapacityStep;
+		public int _upgradeSpeedStep;
+		public int _upgradeQuantityStep;
 		public int _upgradeCapacityCostBase_gold;
 		public int _upgradeSpeedCostBase_gold;
-		public int _upgradeQualityCostBase_gold;
-		public int _maxOfThisType;
-		public int _maxUpgradesEach;
-		public FactoryDBRow(string __ID, string __name, string __description, string __factoryBuildCostBase_gold, string __factoryUnitProfit_gold, string __factoryUnitProfit_wood, string __factoryUnitProfit_stone, string __factoryUnitProfit_metal, string __factoryUnitCost_gold, string __factoryUnitCost_wood, string __factoryUnitCost_stone, string __factoryUnitCost_metal, string __unitCapacity, string __unitsPerMinute, string __upgradeCapacityCostBase_gold, string __upgradeSpeedCostBase_gold, string __upgradeQualityCostBase_gold, string __maxOfThisType, string __maxUpgradesEach) 
+		public int _upgradeQuantityCostBase_gold;
+		public int _maxCapacityUpgrades;
+		public int _maxSpeedUpgrades;
+		public int _maxQuantityUpgrades;
+		public int _maxOfThisTypeOfFactory;
+		public FactoryDBRow(string __ID, string __name, string __description, string __factoryBuildCostBase, string __factoryUnitProfit_EconomyType, string __factoryUnitCost_EconomyType_1, string __factoryUnitCost_Amount_1, string __startCapacity, string __startProdPerMinute, string __startQuantity, string __upgradeCapacityStep, string __upgradeSpeedStep, string __upgradeQuantityStep, string __upgradeCapacityCostBase_gold, string __upgradeSpeedCostBase_gold, string __upgradeQuantityCostBase_gold, string __maxCapacityUpgrades, string __maxSpeedUpgrades, string __maxQuantityUpgrades, string __maxOfThisTypeOfFactory) 
 		{
 			_name = __name.Trim();
 			_description = __description.Trim();
 			{
 			int res;
-				if(int.TryParse(__factoryBuildCostBase_gold, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryBuildCostBase_gold = res;
+				if(int.TryParse(__factoryBuildCostBase, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_factoryBuildCostBase = res;
 				else
-					Debug.LogError("Failed To Convert _factoryBuildCostBase_gold string: "+ __factoryBuildCostBase_gold +" to int");
+					Debug.LogError("Failed To Convert _factoryBuildCostBase string: "+ __factoryBuildCostBase +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitProfit_gold, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitProfit_gold = res;
+				if(int.TryParse(__factoryUnitProfit_EconomyType, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_factoryUnitProfit_EconomyType = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitProfit_gold string: "+ __factoryUnitProfit_gold +" to int");
+					Debug.LogError("Failed To Convert _factoryUnitProfit_EconomyType string: "+ __factoryUnitProfit_EconomyType +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitProfit_wood, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitProfit_wood = res;
+				if(int.TryParse(__factoryUnitCost_EconomyType_1, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_factoryUnitCost_EconomyType_1 = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitProfit_wood string: "+ __factoryUnitProfit_wood +" to int");
+					Debug.LogError("Failed To Convert _factoryUnitCost_EconomyType_1 string: "+ __factoryUnitCost_EconomyType_1 +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitProfit_stone, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitProfit_stone = res;
+				if(int.TryParse(__factoryUnitCost_Amount_1, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_factoryUnitCost_Amount_1 = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitProfit_stone string: "+ __factoryUnitProfit_stone +" to int");
+					Debug.LogError("Failed To Convert _factoryUnitCost_Amount_1 string: "+ __factoryUnitCost_Amount_1 +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitProfit_metal, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitProfit_metal = res;
+				if(int.TryParse(__startCapacity, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_startCapacity = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitProfit_metal string: "+ __factoryUnitProfit_metal +" to int");
+					Debug.LogError("Failed To Convert _startCapacity string: "+ __startCapacity +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitCost_gold, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitCost_gold = res;
+				if(int.TryParse(__startProdPerMinute, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_startProdPerMinute = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitCost_gold string: "+ __factoryUnitCost_gold +" to int");
+					Debug.LogError("Failed To Convert _startProdPerMinute string: "+ __startProdPerMinute +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitCost_wood, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitCost_wood = res;
+				if(int.TryParse(__startQuantity, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_startQuantity = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitCost_wood string: "+ __factoryUnitCost_wood +" to int");
+					Debug.LogError("Failed To Convert _startQuantity string: "+ __startQuantity +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitCost_stone, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitCost_stone = res;
+				if(int.TryParse(__upgradeCapacityStep, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_upgradeCapacityStep = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitCost_stone string: "+ __factoryUnitCost_stone +" to int");
+					Debug.LogError("Failed To Convert _upgradeCapacityStep string: "+ __upgradeCapacityStep +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__factoryUnitCost_metal, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_factoryUnitCost_metal = res;
+				if(int.TryParse(__upgradeSpeedStep, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_upgradeSpeedStep = res;
 				else
-					Debug.LogError("Failed To Convert _factoryUnitCost_metal string: "+ __factoryUnitCost_metal +" to int");
+					Debug.LogError("Failed To Convert _upgradeSpeedStep string: "+ __upgradeSpeedStep +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__unitCapacity, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_unitCapacity = res;
+				if(int.TryParse(__upgradeQuantityStep, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_upgradeQuantityStep = res;
 				else
-					Debug.LogError("Failed To Convert _unitCapacity string: "+ __unitCapacity +" to int");
-			}
-			{
-			int res;
-				if(int.TryParse(__unitsPerMinute, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_unitsPerMinute = res;
-				else
-					Debug.LogError("Failed To Convert _unitsPerMinute string: "+ __unitsPerMinute +" to int");
+					Debug.LogError("Failed To Convert _upgradeQuantityStep string: "+ __upgradeQuantityStep +" to int");
 			}
 			{
 			int res;
@@ -129,28 +123,42 @@ namespace Google2u
 			}
 			{
 			int res;
-				if(int.TryParse(__upgradeQualityCostBase_gold, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_upgradeQualityCostBase_gold = res;
+				if(int.TryParse(__upgradeQuantityCostBase_gold, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_upgradeQuantityCostBase_gold = res;
 				else
-					Debug.LogError("Failed To Convert _upgradeQualityCostBase_gold string: "+ __upgradeQualityCostBase_gold +" to int");
+					Debug.LogError("Failed To Convert _upgradeQuantityCostBase_gold string: "+ __upgradeQuantityCostBase_gold +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__maxOfThisType, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_maxOfThisType = res;
+				if(int.TryParse(__maxCapacityUpgrades, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_maxCapacityUpgrades = res;
 				else
-					Debug.LogError("Failed To Convert _maxOfThisType string: "+ __maxOfThisType +" to int");
+					Debug.LogError("Failed To Convert _maxCapacityUpgrades string: "+ __maxCapacityUpgrades +" to int");
 			}
 			{
 			int res;
-				if(int.TryParse(__maxUpgradesEach, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
-					_maxUpgradesEach = res;
+				if(int.TryParse(__maxSpeedUpgrades, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_maxSpeedUpgrades = res;
 				else
-					Debug.LogError("Failed To Convert _maxUpgradesEach string: "+ __maxUpgradesEach +" to int");
+					Debug.LogError("Failed To Convert _maxSpeedUpgrades string: "+ __maxSpeedUpgrades +" to int");
+			}
+			{
+			int res;
+				if(int.TryParse(__maxQuantityUpgrades, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_maxQuantityUpgrades = res;
+				else
+					Debug.LogError("Failed To Convert _maxQuantityUpgrades string: "+ __maxQuantityUpgrades +" to int");
+			}
+			{
+			int res;
+				if(int.TryParse(__maxOfThisTypeOfFactory, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
+					_maxOfThisTypeOfFactory = res;
+				else
+					Debug.LogError("Failed To Convert _maxOfThisTypeOfFactory string: "+ __maxOfThisTypeOfFactory +" to int");
 			}
 		}
 
-		public int Length { get { return 18; } }
+		public int Length { get { return 19; } }
 
 		public string this[int i]
 		{
@@ -172,52 +180,55 @@ namespace Google2u
 					ret = _description.ToString();
 					break;
 				case 2:
-					ret = _factoryBuildCostBase_gold.ToString();
+					ret = _factoryBuildCostBase.ToString();
 					break;
 				case 3:
-					ret = _factoryUnitProfit_gold.ToString();
+					ret = _factoryUnitProfit_EconomyType.ToString();
 					break;
 				case 4:
-					ret = _factoryUnitProfit_wood.ToString();
+					ret = _factoryUnitCost_EconomyType_1.ToString();
 					break;
 				case 5:
-					ret = _factoryUnitProfit_stone.ToString();
+					ret = _factoryUnitCost_Amount_1.ToString();
 					break;
 				case 6:
-					ret = _factoryUnitProfit_metal.ToString();
+					ret = _startCapacity.ToString();
 					break;
 				case 7:
-					ret = _factoryUnitCost_gold.ToString();
+					ret = _startProdPerMinute.ToString();
 					break;
 				case 8:
-					ret = _factoryUnitCost_wood.ToString();
+					ret = _startQuantity.ToString();
 					break;
 				case 9:
-					ret = _factoryUnitCost_stone.ToString();
+					ret = _upgradeCapacityStep.ToString();
 					break;
 				case 10:
-					ret = _factoryUnitCost_metal.ToString();
+					ret = _upgradeSpeedStep.ToString();
 					break;
 				case 11:
-					ret = _unitCapacity.ToString();
+					ret = _upgradeQuantityStep.ToString();
 					break;
 				case 12:
-					ret = _unitsPerMinute.ToString();
-					break;
-				case 13:
 					ret = _upgradeCapacityCostBase_gold.ToString();
 					break;
-				case 14:
+				case 13:
 					ret = _upgradeSpeedCostBase_gold.ToString();
 					break;
+				case 14:
+					ret = _upgradeQuantityCostBase_gold.ToString();
+					break;
 				case 15:
-					ret = _upgradeQualityCostBase_gold.ToString();
+					ret = _maxCapacityUpgrades.ToString();
 					break;
 				case 16:
-					ret = _maxOfThisType.ToString();
+					ret = _maxSpeedUpgrades.ToString();
 					break;
 				case 17:
-					ret = _maxUpgradesEach.ToString();
+					ret = _maxQuantityUpgrades.ToString();
+					break;
+				case 18:
+					ret = _maxOfThisTypeOfFactory.ToString();
 					break;
 			}
 
@@ -235,38 +246,35 @@ namespace Google2u
 				case "description":
 					ret = _description.ToString();
 					break;
-				case "factoryBuildCostBase_gold":
-					ret = _factoryBuildCostBase_gold.ToString();
+				case "factoryBuildCostBase":
+					ret = _factoryBuildCostBase.ToString();
 					break;
-				case "factoryUnitProfit_gold":
-					ret = _factoryUnitProfit_gold.ToString();
+				case "factoryUnitProfit_EconomyType":
+					ret = _factoryUnitProfit_EconomyType.ToString();
 					break;
-				case "factoryUnitProfit_wood":
-					ret = _factoryUnitProfit_wood.ToString();
+				case "factoryUnitCost_EconomyType_1":
+					ret = _factoryUnitCost_EconomyType_1.ToString();
 					break;
-				case "factoryUnitProfit_stone":
-					ret = _factoryUnitProfit_stone.ToString();
+				case "factoryUnitCost_Amount_1":
+					ret = _factoryUnitCost_Amount_1.ToString();
 					break;
-				case "factoryUnitProfit_metal":
-					ret = _factoryUnitProfit_metal.ToString();
+				case "startCapacity":
+					ret = _startCapacity.ToString();
 					break;
-				case "factoryUnitCost_gold":
-					ret = _factoryUnitCost_gold.ToString();
+				case "startProdPerMinute":
+					ret = _startProdPerMinute.ToString();
 					break;
-				case "factoryUnitCost_wood":
-					ret = _factoryUnitCost_wood.ToString();
+				case "startQuantity":
+					ret = _startQuantity.ToString();
 					break;
-				case "factoryUnitCost_stone":
-					ret = _factoryUnitCost_stone.ToString();
+				case "upgradeCapacityStep":
+					ret = _upgradeCapacityStep.ToString();
 					break;
-				case "factoryUnitCost_metal":
-					ret = _factoryUnitCost_metal.ToString();
+				case "upgradeSpeedStep":
+					ret = _upgradeSpeedStep.ToString();
 					break;
-				case "unitCapacity":
-					ret = _unitCapacity.ToString();
-					break;
-				case "unitsPerMinute":
-					ret = _unitsPerMinute.ToString();
+				case "upgradeQuantityStep":
+					ret = _upgradeQuantityStep.ToString();
 					break;
 				case "upgradeCapacityCostBase_gold":
 					ret = _upgradeCapacityCostBase_gold.ToString();
@@ -274,14 +282,20 @@ namespace Google2u
 				case "upgradeSpeedCostBase_gold":
 					ret = _upgradeSpeedCostBase_gold.ToString();
 					break;
-				case "upgradeQualityCostBase_gold":
-					ret = _upgradeQualityCostBase_gold.ToString();
+				case "upgradeQuantityCostBase_gold":
+					ret = _upgradeQuantityCostBase_gold.ToString();
 					break;
-				case "maxOfThisType":
-					ret = _maxOfThisType.ToString();
+				case "maxCapacityUpgrades":
+					ret = _maxCapacityUpgrades.ToString();
 					break;
-				case "maxUpgradesEach":
-					ret = _maxUpgradesEach.ToString();
+				case "maxSpeedUpgrades":
+					ret = _maxSpeedUpgrades.ToString();
+					break;
+				case "maxQuantityUpgrades":
+					ret = _maxQuantityUpgrades.ToString();
+					break;
+				case "maxOfThisTypeOfFactory":
+					ret = _maxOfThisTypeOfFactory.ToString();
 					break;
 			}
 
@@ -292,22 +306,23 @@ namespace Google2u
 			string ret = System.String.Empty;
 			ret += "{" + "name" + " : " + _name.ToString() + "} ";
 			ret += "{" + "description" + " : " + _description.ToString() + "} ";
-			ret += "{" + "factoryBuildCostBase_gold" + " : " + _factoryBuildCostBase_gold.ToString() + "} ";
-			ret += "{" + "factoryUnitProfit_gold" + " : " + _factoryUnitProfit_gold.ToString() + "} ";
-			ret += "{" + "factoryUnitProfit_wood" + " : " + _factoryUnitProfit_wood.ToString() + "} ";
-			ret += "{" + "factoryUnitProfit_stone" + " : " + _factoryUnitProfit_stone.ToString() + "} ";
-			ret += "{" + "factoryUnitProfit_metal" + " : " + _factoryUnitProfit_metal.ToString() + "} ";
-			ret += "{" + "factoryUnitCost_gold" + " : " + _factoryUnitCost_gold.ToString() + "} ";
-			ret += "{" + "factoryUnitCost_wood" + " : " + _factoryUnitCost_wood.ToString() + "} ";
-			ret += "{" + "factoryUnitCost_stone" + " : " + _factoryUnitCost_stone.ToString() + "} ";
-			ret += "{" + "factoryUnitCost_metal" + " : " + _factoryUnitCost_metal.ToString() + "} ";
-			ret += "{" + "unitCapacity" + " : " + _unitCapacity.ToString() + "} ";
-			ret += "{" + "unitsPerMinute" + " : " + _unitsPerMinute.ToString() + "} ";
+			ret += "{" + "factoryBuildCostBase" + " : " + _factoryBuildCostBase.ToString() + "} ";
+			ret += "{" + "factoryUnitProfit_EconomyType" + " : " + _factoryUnitProfit_EconomyType.ToString() + "} ";
+			ret += "{" + "factoryUnitCost_EconomyType_1" + " : " + _factoryUnitCost_EconomyType_1.ToString() + "} ";
+			ret += "{" + "factoryUnitCost_Amount_1" + " : " + _factoryUnitCost_Amount_1.ToString() + "} ";
+			ret += "{" + "startCapacity" + " : " + _startCapacity.ToString() + "} ";
+			ret += "{" + "startProdPerMinute" + " : " + _startProdPerMinute.ToString() + "} ";
+			ret += "{" + "startQuantity" + " : " + _startQuantity.ToString() + "} ";
+			ret += "{" + "upgradeCapacityStep" + " : " + _upgradeCapacityStep.ToString() + "} ";
+			ret += "{" + "upgradeSpeedStep" + " : " + _upgradeSpeedStep.ToString() + "} ";
+			ret += "{" + "upgradeQuantityStep" + " : " + _upgradeQuantityStep.ToString() + "} ";
 			ret += "{" + "upgradeCapacityCostBase_gold" + " : " + _upgradeCapacityCostBase_gold.ToString() + "} ";
 			ret += "{" + "upgradeSpeedCostBase_gold" + " : " + _upgradeSpeedCostBase_gold.ToString() + "} ";
-			ret += "{" + "upgradeQualityCostBase_gold" + " : " + _upgradeQualityCostBase_gold.ToString() + "} ";
-			ret += "{" + "maxOfThisType" + " : " + _maxOfThisType.ToString() + "} ";
-			ret += "{" + "maxUpgradesEach" + " : " + _maxUpgradesEach.ToString() + "} ";
+			ret += "{" + "upgradeQuantityCostBase_gold" + " : " + _upgradeQuantityCostBase_gold.ToString() + "} ";
+			ret += "{" + "maxCapacityUpgrades" + " : " + _maxCapacityUpgrades.ToString() + "} ";
+			ret += "{" + "maxSpeedUpgrades" + " : " + _maxSpeedUpgrades.ToString() + "} ";
+			ret += "{" + "maxQuantityUpgrades" + " : " + _maxQuantityUpgrades.ToString() + "} ";
+			ret += "{" + "maxOfThisTypeOfFactory" + " : " + _maxOfThisTypeOfFactory.ToString() + "} ";
 			return ret;
 		}
 	}
@@ -334,8 +349,8 @@ namespace Google2u
 
 		private FactoryDB()
 		{
-			Rows.Add( new FactoryDBRow("LumberYard", "Lumber Yard", "Chops down Trees", "5", "0", "1", "0", "0", "0", "0", "0", "0", "10", "20", "5", "5", "5", "5", "5"));
-			Rows.Add( new FactoryDBRow("Quarry", "Quarry", "Excavates Stone", "10", "0", "1", "0", "0", "0", "0", "0", "0", "10", "20", "5", "5", "5", "5", "5"));
+			Rows.Add( new FactoryDBRow("LumberYard", "Lumber Yard", "Chops down Trees", "50", "1", "0", "0", "10", "20", "1", "5", "5", "1", "2", "5", "20", "50", "50", "10", "5"));
+			Rows.Add( new FactoryDBRow("Quarry", "Quarry", "Excavates Stone", "250", "2", "0", "0", "10", "20", "1", "5", "5", "1", "2", "5", "20", "50", "50", "10", "5"));
 		}
 		public IGoogle2uRow GetGenRow(string in_RowString)
 		{

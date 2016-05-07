@@ -49,7 +49,7 @@ public class GameState : MonoBehaviour {
 
     public Economy costForFactoryType(FactoryConfig factoryType)
     {
-        return factoryType.baseBuildCost.applyGrowthCurve(numberOfFactoryTypeOwned(factoryType.factoryID));
+        return factoryType.baseBuildCost.applyGrowthCurve(numberOfFactoryTypeOwned(factoryType.factoryID),Config.masterConfig.buildingCostExponent);
     }
 
     public bool CanPurchaseFactory (FactoryConfig f)

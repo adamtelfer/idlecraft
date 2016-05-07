@@ -42,6 +42,28 @@ namespace Assets
             metal = pmetal;
         }
 
+        public Economy (EconomyType economyType, int amount)
+        {
+            AddForEconomyType(economyType, amount);
+        }
+
+        public bool AddForEconomyType (EconomyType economyType, int amount)
+        {
+            switch (economyType)
+            {
+                case EconomyType.GOLD:
+                    gold += amount; return true;
+                case EconomyType.WOOD:
+                    wood += amount; return true;
+                case EconomyType.STONE:
+                    stone += amount; return true;
+                case EconomyType.METAL:
+                    metal += amount; return true;
+                default:
+                    return false;
+            }
+        }
+
         public int getValueForType (EconomyType type)
         {
             switch (type)
@@ -126,14 +148,13 @@ namespace Assets
             }
         }
 
-        public Economy applyGrowthCurve(int x)
+        public Economy applyGrowthCurve(int purchaseLevel, float baseExponent)
         {
-            float growthBase = Config.masterConfig.growthExponent;
             Economy e = new Economy();
-            e.gold = (int)(gold * Mathf.Pow(growthBase, x+1));
-            e.wood = (int)(wood * Mathf.Pow(growthBase, x+1));
-            e.stone = (int)(stone * Mathf.Pow(growthBase, x+1));
-            e.metal = (int)(metal * Mathf.Pow(growthBase, x+1));
+            e.gold = (int)(gold * Mathf.Pow(baseExponent, purchaseLevel));
+            e.wood = (int)(wood * Mathf.Pow(baseExponent, purchaseLevel));
+            e.stone = (int)(stone * Mathf.Pow(baseExponent, purchaseLevel));
+            e.metal = (int)(metal * Mathf.Pow(baseExponent, purchaseLevel));
             return e;
         }
 

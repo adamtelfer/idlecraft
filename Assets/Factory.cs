@@ -9,15 +9,39 @@ namespace Assets
     {
         public FactoryConfig config;
 
-        //TODO: Factory is not loading Config Properly
-        public Economy unitProfit;
-        public Economy cappedProfit;
-        public Economy currentProfit;
+        //factory progress state
+        public int currentCapacityLevel;
+        public int currentSpeedLevel;
+        public int currentQuantityLevel;
 
+
+        public Economy unitProfit // what is produced each time
+        {
+            get
+            {
+                return config.baseProfit * ((currentQuantityLevel+1) * config.stepQuantity);
+            }
+        }
+
+        public Economy cappedProfit
+        {
+            get
+            {
+                return (config.baseProfit * config.baseUnitCapacity) + (config.baseProfit * (currentCapacityLevel * config.stepCapacity));
+            }
+        }
+
+        public Economy currentProfit;
         public Economy unitCost;
         public Economy collectedUnits;
 
-        public int unitsPerMinute;
+        public int unitsPerMinute
+        {
+            get
+            {
+                return config.baseUnitsPerMinute + (currentSpeedLevel * config.stepSpeed);
+            }
+        }
         private float timeToProduceUnit;
 
         public enum FactoryStatus
@@ -37,13 +61,13 @@ namespace Assets
         public Factory (FactoryConfig f)
         {
             config = f;
+            currentCapacityLevel = 0;
+            currentSpeedLevel = 0;
+            currentQuantityLevel = 0;
 
-            unitProfit = new Economy(f.baseProfit);
-            cappedProfit = new Economy(f.baseProfit) * f.baseUnitCapacity;
             currentProfit = new Economy();
-            unitCost = new Economy(f.baseUnitCost);
 
-            timeToProduceUnit = 60f / ((float)unitsPerMinute);
+            timeToProduceUnit = 60f / ((float)this.unitsPerMinute);
 
             _time = timeToProduceUnit;
             _status = FactoryStatus.WORKING;
@@ -93,14 +117,20 @@ namespace Assets
 
         public void UpgradeCapacity()
         {
-            cappedProfit = cappedProfit + (unitProfit + unitProfit + unitProfit + unitProfit);
+            currentCapacityLevel = Math.Min(currentCapacityLevel + 1, config.maxCapacityUpgrades);
         }
 
         public void UpgradeProductionSpeed()
         {
-            unitsPerMinute += 5;
-            timeToProduceUnit = 60f / ((float)unitsPerMinute);
+            currentSpeedLevel = Math.Min(currentSpeedLevel + 1, config.maxSpeedUpgrades);
+
+            timeToProduceUnit = 60f / ((float)this.unitsPerMinute);
             _time = timeToProduceUnit;
+        }
+
+        public void UpgradeProductionOutput()
+        {
+            currentQuantityLevel = Math.Min(currentQuantityLevel + 1, config.maxQuantityUpgrades);
         }
     }
 }
