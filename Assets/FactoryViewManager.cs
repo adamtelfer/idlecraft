@@ -20,6 +20,7 @@ public class FactoryViewManager : MonoBehaviour {
     {
         GameObject g = Instantiate(factoryViewPrefab);
         g.transform.SetParent(this.transform);
+        g.transform.SetAsFirstSibling();
         g.transform.localScale = new Vector3(1f, 1f, 1f);
         FactoryView fView = g.GetComponent<FactoryView>();
         fView.Setup(f);

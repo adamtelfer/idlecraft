@@ -10,6 +10,7 @@ public class RootViewManager : MonoBehaviour {
 
     public FactoryPurchasePopupView PurchaseFactoryPopUp;
     public FactoryUpgradePopupView PurchaseUpgradePopup;
+    public MarketPopupView MarketPopup;
 
     public static RootViewManager sharedManager = null;
 
@@ -26,6 +27,11 @@ public class RootViewManager : MonoBehaviour {
     public void OpenPurchaseFactoryPopup()
     {
         this.PushView(PurchaseFactoryPopUp.gameObject);
+    }
+
+    public void OpenMarket()
+    {
+        this.PushView(MarketPopup.gameObject);
     }
 
     //Currently Open Screen
