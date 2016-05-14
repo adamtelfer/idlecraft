@@ -116,10 +116,10 @@ namespace Google2u
 	public sealed class ConfigDB : IGoogle2uDB
 	{
 		public enum rowIds {
-			Default, Ver1, Ver2, Ver3
+			Default
 		};
 		public string [] rowNames = {
-			"Default", "Ver1", "Ver2", "Ver3"
+			"Default"
 		};
 		public System.Collections.Generic.List<ConfigDBRow> Rows = new System.Collections.Generic.List<ConfigDBRow>();
 
@@ -137,9 +137,6 @@ namespace Google2u
 		private ConfigDB()
 		{
 			Rows.Add( new ConfigDBRow("Default", "75", "2", "1.5", "2"));
-			Rows.Add( new ConfigDBRow("Ver1", "75", "2", "1.5", "2"));
-			Rows.Add( new ConfigDBRow("Ver2", "75", "2", "1.5", "2"));
-			Rows.Add( new ConfigDBRow("Ver3", "75", "2", "1.5", "2"));
 		}
 		public IGoogle2uRow GetGenRow(string in_RowString)
 		{

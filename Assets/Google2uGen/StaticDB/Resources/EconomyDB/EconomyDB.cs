@@ -14,12 +14,16 @@ namespace Google2u
 	[System.Serializable]
 	public class EconomyDBRow : IGoogle2uRow
 	{
+		public string _ID;
 		public string _longname;
+		public string _iconname;
 		public int _minMarketValue;
 		public int _maxMarketValue;
-		public EconomyDBRow(string __ID, string __longname, string __minMarketValue, string __maxMarketValue) 
+		public EconomyDBRow(string __enum, string __ID, string __longname, string __iconname, string __minMarketValue, string __maxMarketValue) 
 		{
+			_ID = __ID.Trim();
 			_longname = __longname.Trim();
+			_iconname = __iconname.Trim();
 			{
 			int res;
 				if(int.TryParse(__minMarketValue, NumberStyles.Any, CultureInfo.InvariantCulture, out res))
@@ -36,7 +40,7 @@ namespace Google2u
 			}
 		}
 
-		public int Length { get { return 3; } }
+		public int Length { get { return 5; } }
 
 		public string this[int i]
 		{
@@ -52,12 +56,18 @@ namespace Google2u
 			switch( index )
 			{
 				case 0:
-					ret = _longname.ToString();
+					ret = _ID.ToString();
 					break;
 				case 1:
-					ret = _minMarketValue.ToString();
+					ret = _longname.ToString();
 					break;
 				case 2:
+					ret = _iconname.ToString();
+					break;
+				case 3:
+					ret = _minMarketValue.ToString();
+					break;
+				case 4:
 					ret = _maxMarketValue.ToString();
 					break;
 			}
@@ -70,8 +80,14 @@ namespace Google2u
 			var ret = System.String.Empty;
 			switch( colID )
 			{
+				case "ID":
+					ret = _ID.ToString();
+					break;
 				case "longname":
 					ret = _longname.ToString();
+					break;
+				case "iconname":
+					ret = _iconname.ToString();
 					break;
 				case "minMarketValue":
 					ret = _minMarketValue.ToString();
@@ -86,7 +102,9 @@ namespace Google2u
 		public override string ToString()
 		{
 			string ret = System.String.Empty;
+			ret += "{" + "ID" + " : " + _ID.ToString() + "} ";
 			ret += "{" + "longname" + " : " + _longname.ToString() + "} ";
+			ret += "{" + "iconname" + " : " + _iconname.ToString() + "} ";
 			ret += "{" + "minMarketValue" + " : " + _minMarketValue.ToString() + "} ";
 			ret += "{" + "maxMarketValue" + " : " + _maxMarketValue.ToString() + "} ";
 			return ret;
@@ -95,10 +113,10 @@ namespace Google2u
 	public sealed class EconomyDB : IGoogle2uDB
 	{
 		public enum rowIds {
-			WOOD, STONE, METAL
+			GOLD, WOOD, STONE, METAL
 		};
 		public string [] rowNames = {
-			"WOOD", "STONE", "METAL"
+			"GOLD", "WOOD", "STONE", "METAL"
 		};
 		public System.Collections.Generic.List<EconomyDBRow> Rows = new System.Collections.Generic.List<EconomyDBRow>();
 
@@ -115,9 +133,10 @@ namespace Google2u
 
 		private EconomyDB()
 		{
-			Rows.Add( new EconomyDBRow("WOOD", "Wood", "4", "6"));
-			Rows.Add( new EconomyDBRow("STONE", "Stone", "8", "12"));
-			Rows.Add( new EconomyDBRow("METAL", "Metal", "16", "24"));
+			Rows.Add( new EconomyDBRow("GOLD", "0", "Gold", "icon_gold", "1", "1"));
+			Rows.Add( new EconomyDBRow("WOOD", "1", "Wood", "icon_wood", "1", "1"));
+			Rows.Add( new EconomyDBRow("STONE", "2", "Stone", "icon_stone", "100", "100"));
+			Rows.Add( new EconomyDBRow("METAL", "3", "Metal", "icon_metal", "10000", "10000"));
 		}
 		public IGoogle2uRow GetGenRow(string in_RowString)
 		{

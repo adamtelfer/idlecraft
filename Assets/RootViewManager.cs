@@ -27,11 +27,13 @@ public class RootViewManager : MonoBehaviour {
     public void OpenPurchaseFactoryPopup()
     {
         this.PushView(PurchaseFactoryPopUp.gameObject);
+        PurchaseFactoryPopUp.OnPopUpOpen();
     }
 
     public void OpenMarket()
     {
         this.PushView(MarketPopup.gameObject);
+        MarketPopup.OnPopUpOpen();
     }
 
     //Currently Open Screen

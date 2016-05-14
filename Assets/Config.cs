@@ -40,5 +40,10 @@ namespace Assets
                 factoryTypes.Add(key,fconfig);
             }
         }
+
+        public EconomyDBRow GetEconomyConfig(Economy.EconomyType economyType)
+        {
+            return EconomyDB.Instance.GetRow((EconomyDB.rowIds)economyType);
+        }
     }
 }

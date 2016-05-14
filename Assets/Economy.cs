@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.Text;
+using Google2u;
 
 namespace Assets
 {
@@ -62,6 +63,16 @@ namespace Assets
                 default:
                     return false;
             }
+        }
+
+        public static EconomyType getTypeForConfig (EconomyDBRow config)
+        {
+            return (EconomyType)(Int32.Parse(config._ID));
+        }
+
+        public int getValueForType (EconomyDBRow config)
+        {
+            return getValueForType(getTypeForConfig(config));
         }
 
         public int getValueForType (EconomyType type)
